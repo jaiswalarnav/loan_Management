@@ -75,6 +75,5 @@ public class Support {
                 + ", deletedAt=" + deletedAt + "]";
     }
     
-    
 
 }
