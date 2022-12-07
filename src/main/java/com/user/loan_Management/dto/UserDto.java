@@ -2,10 +2,16 @@ package com.user.loan_Management.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.NotNull;
+
 public class UserDto {
 	
 	private long id;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@NotNull(message="dob can not be empty")
 	private Timestamp dob;
 	
 	
