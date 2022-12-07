@@ -2,6 +2,8 @@ package com.user.loan_Management.model;
 
 import java.sql.Timestamp;
 
+import com.user.loan_Management.model.support.Support;
+
 import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class LoanApplication {
+public class LoanApplication extends Support{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
