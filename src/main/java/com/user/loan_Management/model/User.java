@@ -4,8 +4,14 @@ import java.sql.Timestamp;
 
 import com.user.loan_Management.model.support.Support;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 public class User extends Support{
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	private Timestamp dob;
