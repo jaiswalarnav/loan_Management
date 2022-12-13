@@ -11,22 +11,27 @@ public class LoanApplicationDtoToLoanApplication {
 
 		loanApplication.setAadharNo(loanApplicationDto.getAadharNo());
 		loanApplication.setAddress(loanApplicationDto.getAddress());
-		loanApplication.setAnnualIncome(loanApplicationDto.getAnnualIncome());
+		loanApplication.setMonthlyIncome(loanApplicationDto.getMonthlyIncome());
 		loanApplication.setApplicationStatus(loanApplicationDto.getApplicationStatus());
-		loanApplication.setContactNo(loanApplicationDto.getContactNo());
-
+		loanApplication.setContactNo("+91" + loanApplicationDto.getContactNo());
 		loanApplication.setDob(loanApplicationDto.getDob());
 		loanApplication.setGender(loanApplicationDto.getGender());
-
 		loanApplication.setMailId(loanApplicationDto.getMailId());
-		loanApplication.setMarried(loanApplicationDto.getMarried());
+		loanApplication.setMarried(loanApplicationDto.isMarried());
 		loanApplication.setName(loanApplicationDto.getName());
-		loanApplication.setOrganisation(loanApplicationDto.getOrganisation());
+		loanApplication.setEmployerName(loanApplicationDto.getEmployerName());
 		loanApplication.setPanNo(loanApplicationDto.getPanNo());
-		loanApplication.setProfession(loanApplicationDto.getProfession());
+		loanApplication.setOccupationType(loanApplicationDto.getOccupationType());
+		loanApplication.setCurrentEmployementPeriod(loanApplicationDto.getCurrentEmployementPeriod());
+		loanApplication.setForm16(loanApplicationDto.getForm16());
+		loanApplication.setLoanTenure(loanApplicationDto.getLoanTenure());
+		loanApplication.setPhoto(loanApplicationDto.getPhoto());
+		loanApplication.setSalarySlip(loanApplicationDto.getSalarySlip());
+		loanApplication.setSignature(loanApplicationDto.getSignature());
+		loanApplication.setTotalEmi(loanApplicationDto.getTotalEmi());
+		loanApplication.setLoanAmount(loanApplicationDto.getLoanAmount());
+		loanApplication.setOtherLoans(loanApplicationDto.isOtherLoans());
 
-		loanApplication.setWorkExperience(loanApplicationDto.getWorkExperience());
-		
 		return loanApplication;
 
 	}
