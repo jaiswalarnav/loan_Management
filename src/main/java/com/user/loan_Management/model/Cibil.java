@@ -8,13 +8,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Admin {
-
+public class Cibil {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int adminId;
-
-	private String password;
-	private long applicationNo;
+	private int id;
+	
+	private String panNo;
+	
+	private int cibilScore;
 
 }

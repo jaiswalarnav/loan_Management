@@ -8,13 +8,11 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Admin {
-
+public class Token {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int adminId;
-
-	private String password;
-	private long applicationNo;
+	private long id;
+	
+	private String token;
 
 }
