@@ -8,14 +8,11 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Cibil {
-	
+public class Token {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	
-	private String panNo;
-	
-	private int cibilScore;
+	private String token;
 
 }
