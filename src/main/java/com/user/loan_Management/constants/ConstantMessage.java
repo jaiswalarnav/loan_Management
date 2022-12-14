@@ -29,5 +29,11 @@ public class ConstantMessage {
 	public static final String LOGIN_MESSAGE=" You are successfully logged In";
 	
 	public static final String UNAUTHORIZED_USER="Unauthorized user";
+	
+	public static final String UPDATE_SUCCESS="updated successfully";
+	
+	public static final String NO_CONTENT="Data not available";
+	
+	public static final String EMI_MESSAGE="Your monthly EMI will be : ";
 
 }

@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.user.loan_Management.constants.ConstantMessage;
 import com.user.loan_Management.constants.StatusCode;
+import com.user.loan_Management.dto.CalculateEmiDto;
 import com.user.loan_Management.dto.LoanApplicationDto;
 import com.user.loan_Management.dto.LoanApplicationStatusDto;
+import com.user.loan_Management.dto.LoanDetailsDto;
 import com.user.loan_Management.http.response.DataResponse;
 import com.user.loan_Management.service.LoanApplicationService;
 
@@ -102,5 +104,47 @@ public class LoanApplicationController {
 
 		}
 	}
+	
+	//this handler is to view loan details
+	
+	@GetMapping("/loan-details")
+	public DataResponse viewLoanDetails() {
+		try {
+			LoanDetailsDto loanDetailsDto = loanApplicationService.viewLoanDetails();
 
+			return new DataResponse(StatusCode.SUCCESS, ConstantMessage.OK, loanDetailsDto);
+		} catch (Exception e) {
+
+			return new DataResponse(StatusCode.INTERNAL_SERVER_ERROR, ConstantMessage.INTERNAL_SERVER_ERROR,
+					e.getMessage());
+		}
+
+	}
+	
+	//this handler is to calculate emi
+	
+	@PostMapping("calculate-emi")
+	public DataResponse calculateEmi(@Valid @RequestBody CalculateEmiDto calculateEmiDto, BindingResult bindingResult) {
+		try {
+			if (bindingResult.hasErrors()) {
+				List<String> errorMessage = new ArrayList<String>();
+
+				for (Object object : bindingResult.getAllErrors()) {
+					if (object instanceof FieldError) {
+						FieldError fieldError = (FieldError) object;
+						errorMessage.add(fieldError.getDefaultMessage());
+					}
+				}
+			}
+
+			double emi = loanApplicationService.calculateEmi(calculateEmiDto);
+
+			return new DataResponse(StatusCode.SUCCESS, ConstantMessage.OK, ConstantMessage.EMI_MESSAGE + emi);
+		}
+
+		catch (Exception e) {
+			return new DataResponse(StatusCode.INTERNAL_SERVER_ERROR, ConstantMessage.INTERNAL_SERVER_ERROR,
+					e.getMessage());
+		}
+	}
 }
