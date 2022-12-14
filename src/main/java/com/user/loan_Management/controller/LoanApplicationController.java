@@ -137,7 +137,7 @@ public class LoanApplicationController {
 				}
 			}
 
-			double emi = loanApplicationService.calculateEmi(calculateEmiDto);
+			int emi =(int) Math.round(loanApplicationService.calculateEmi(calculateEmiDto));
 
 			return new DataResponse(StatusCode.SUCCESS, ConstantMessage.OK, ConstantMessage.EMI_MESSAGE + emi);
 		}
