@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.user.loan_Management.ModelToDto.LoanApplicationToUserViewProfileDto;
 import com.user.loan_Management.constants.ConstantMessage;
 import com.user.loan_Management.dto.UserLoginReturnDto;
+import com.user.loan_Management.dto.UserUpdateProfileDto;
 import com.user.loan_Management.dto.UserViewProfileDto;
+import com.user.loan_Management.dtoToModel.UpdateUserProfileDtoToLoanApplication;
 import com.user.loan_Management.model.LoanApplication;
 import com.user.loan_Management.model.Token;
 import com.user.loan_Management.repository.LoanApplicationRepository;
@@ -35,15 +37,16 @@ public class UserServiceImpl implements UserService {
 
 		if (!loanApplication.get().getDob().equals(dob))
 			throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
-		UserLoginReturnDto userLoginReturnDto = new UserLoginReturnDto();
 
 		Token token = new Token();
 		token.setToken(getToken(loanApplication.get().getId()));
 
 		tokenRepository.save(token);
 
+		UserLoginReturnDto userLoginReturnDto = new UserLoginReturnDto();
 		userLoginReturnDto.setName(loanApplication.get().getName());
 		userLoginReturnDto.setUserToken(token.getToken());
+		
 		return userLoginReturnDto;
 
 	}
@@ -60,6 +63,19 @@ public class UserServiceImpl implements UserService {
 				.loanApplicationToUserViewProfileDto(loanApplication.get());
 
 		return userViewProfileDto;
+	}
+	
+	public void updateUserProfile(long applicationNo, UserUpdateProfileDto userUpdateProfileDto) {
+		Optional<LoanApplication> loanApplication = loanApplicationRepository.findById(applicationNo);
+		
+		if (!loanApplication.isPresent())
+			throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
+
+		UpdateUserProfileDtoToLoanApplication updateUserProfileDto = new UpdateUserProfileDtoToLoanApplication();
+		
+		loanApplicationRepository.save(updateUserProfileDto.updateUserProfileDtoToLoanApplication(userUpdateProfileDto,
+				loanApplication.get()));
+
 	}
 
 	public String getToken(long applicationNo) {
