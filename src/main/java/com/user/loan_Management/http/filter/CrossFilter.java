@@ -50,7 +50,7 @@ public class CrossFilter implements Filter {
 				else
 					throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
 			}
-			else if(url.contains("/loan/personal-loan/apply-loan")||url.contains("/loan/personal-loan/loan-status")||url.contains("/loan/personal-loan/loan-details")||url.contains("/loan/personal-loan/calculate-emi")) {
+			else if(url.contains("/loan/personal-loan/apply-loan")||url.contains("/loan/personal-loan/loan-status")||url.contains("/loan/personal-loan/loan-details")||url.contains("/loan/personal-loan/calculate-emi") ||url.contains("/admin/register")) {
 				chain.doFilter(req, res);
 			}
 				else {

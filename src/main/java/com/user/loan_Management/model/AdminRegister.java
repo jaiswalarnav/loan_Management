@@ -1,5 +1,7 @@
 package com.user.loan_Management.model;
 
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,11 +10,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Admin {
+public class AdminRegister {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
+
+	@Column(unique = true)
+	private String name;
 
 	private String password;
 
