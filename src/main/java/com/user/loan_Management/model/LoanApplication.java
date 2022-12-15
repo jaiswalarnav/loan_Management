@@ -33,13 +33,15 @@ public class LoanApplication extends Support {
 
 	private String occupationType;
 
-	private String employerName;
+	
 
 	private int monthlyIncome;
 
 	private boolean married;
 
 	private int currentEmployementPeriod;
+	
+	private String employerName;
 
 	private String photo;
 
