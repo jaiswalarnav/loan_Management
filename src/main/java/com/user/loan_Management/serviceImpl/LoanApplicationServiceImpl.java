@@ -2,6 +2,7 @@ package com.user.loan_Management.serviceImpl;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
 	@Autowired
 	LoanDetailsRepository loanDetailsRepository;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	public long createLoanApplication(LoanApplicationDto loanApplicationDto) throws Exception {
 
@@ -34,15 +38,21 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
 		if (loanApplication != null)
 			throw new RuntimeException(ConstantMessage.LOAN_APPLICATION_IN_PROCESS);
-		LoanApplicationDtoToLoanApplication loanApplicationDtoToLoanApplication = new LoanApplicationDtoToLoanApplication();
+		else
+			loanApplication = new LoanApplication();
+		
+		
+		//LoanApplicationDtoToLoanApplication loanApplicationDtoToLoanApplication = new LoanApplicationDtoToLoanApplication();
 		loanApplicationDto.setApplicationStatus(ConstantMessage.IN_PROCESS);
-		loanApplication = loanApplicationDtoToLoanApplication.dtoToLoanApplication(loanApplicationDto);
+		modelMapper.map(loanApplicationDto, loanApplication);
+		System.out.println(loanApplication);
+		//loanApplication = loanApplicationDtoToLoanApplication.dtoToLoanApplication(loanApplicationDto);
 
-		loanApplicationRepository.save(loanApplication);
+		 return loanApplicationRepository.save(loanApplication).getId();
 
-		long applicationNo = loanApplicationRepository.findByPanNo(loanApplication.getPanNo()).getId();
+	//	long applicationNo = loanApplicationRepository.findByPanNo(loanApplication.getPanNo()).getId();
 
-		return applicationNo;
+		//return applicationNo;
 
 	}
 
