@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Data
@@ -21,7 +22,7 @@ public class LoanApplication extends Support {
 
 	private String contactNo;
 
-	private String mailId;
+	private String mail;
 
 	private String gender;
 

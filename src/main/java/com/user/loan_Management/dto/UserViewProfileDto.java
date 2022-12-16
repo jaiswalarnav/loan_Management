@@ -11,7 +11,7 @@ public class UserViewProfileDto {
 
 	private String contactNo;
 
-	private String mailId;
+	private String mail;
 
 	private String gender;
 

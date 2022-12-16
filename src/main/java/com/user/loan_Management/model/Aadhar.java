@@ -29,7 +29,7 @@ public class Aadhar extends Support {
 	
 	private String phoneNo;
 	
-	private String emailId;
+	private String email;
 	
 	private String address;
 	

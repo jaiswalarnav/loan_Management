@@ -3,6 +3,8 @@ package com.user.loan_Management.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,7 +26,7 @@ import com.user.loan_Management.service.UserService;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("loan/personal-loan/user")

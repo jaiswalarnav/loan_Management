@@ -6,13 +6,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.user.loan_Management.ModelToDto.LoanDetailsToLoanDetailsDto;
 import com.user.loan_Management.constants.ConstantMessage;
 import com.user.loan_Management.dto.CalculateEmiDto;
 import com.user.loan_Management.dto.LoanApplicationDto;
 import com.user.loan_Management.dto.LoanApplicationStatusDto;
 import com.user.loan_Management.dto.LoanDetailsDto;
-import com.user.loan_Management.dtoToModel.LoanApplicationDtoToLoanApplication;
 import com.user.loan_Management.model.LoanApplication;
 import com.user.loan_Management.repository.LoanApplicationRepository;
 import com.user.loan_Management.repository.LoanDetailsRepository;
@@ -40,19 +38,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 			throw new RuntimeException(ConstantMessage.LOAN_APPLICATION_IN_PROCESS);
 		else
 			loanApplication = new LoanApplication();
-		
-		
-		//LoanApplicationDtoToLoanApplication loanApplicationDtoToLoanApplication = new LoanApplicationDtoToLoanApplication();
+
 		loanApplicationDto.setApplicationStatus(ConstantMessage.IN_PROCESS);
 		modelMapper.map(loanApplicationDto, loanApplication);
 		System.out.println(loanApplication);
-		//loanApplication = loanApplicationDtoToLoanApplication.dtoToLoanApplication(loanApplicationDto);
 
-		 return loanApplicationRepository.save(loanApplication).getId();
-
-	//	long applicationNo = loanApplicationRepository.findByPanNo(loanApplication.getPanNo()).getId();
-
-		//return applicationNo;
+		return loanApplicationRepository.save(loanApplication).getId();
 
 	}
 
@@ -73,12 +64,12 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	
 	public LoanDetailsDto viewLoanDetails() throws Exception {
 
-		LoanDetailsToLoanDetailsDto loanDetailsToLoanDetailsDto = new LoanDetailsToLoanDetailsDto();
-
 		if (loanDetailsRepository.findAll().get(0) == null)
 			throw new RuntimeException(ConstantMessage.NO_CONTENT);
+		LoanDetailsDto loanDetailsDto = new LoanDetailsDto();
+		modelMapper.map(loanDetailsRepository.findAll().get(0), loanDetailsDto);
+		return loanDetailsDto;
 
-		return (loanDetailsToLoanDetailsDto.LoanDetailsToDto(loanDetailsRepository.findAll().get(0)));
 	}
 	
 	
