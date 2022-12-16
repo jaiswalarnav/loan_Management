@@ -16,7 +16,6 @@ import com.user.loan_Management.constants.StatusCode;
 import com.user.loan_Management.dto.AdminDto;
 import com.user.loan_Management.dto.AdminRegisterDto;
 import com.user.loan_Management.http.response.DataResponse;
-import com.user.loan_Management.model.AdminRegister;
 import com.user.loan_Management.service.AdminService;
 
 import jakarta.validation.Valid;
@@ -30,23 +29,31 @@ public class AdminController {
 	
 	//this handler is for admin login
 	
-//	@PostMapping("/login")
-//	public DataResponse login(@Valid @RequestBody AdminDto adminDto, BindingResult bindingResult) {
-//		
-//		if(bindingResult.hasErrors()) {
-//			
-//			List<String> errorMessage=new ArrayList<String>();
-//			for(Object object: bindingResult.getAllErrors()) {
-//			if(object instanceof FieldError)
-//			{
-//				FieldError fieldError=(FieldError)object;
-//				errorMessage.add(fieldError.getDefaultMessage());
-//			}
-//		}
-//		
-//			return new DataResponse(StatusCode.BAD_REQUEST,ConstantMessage.BAD_REQUEST,errorMessage);
-//	}
-		
+	@PostMapping("/login")
+	public DataResponse login(@Valid @RequestBody AdminDto adminDto, BindingResult bindingResult) {
+
+		try {
+			if (bindingResult.hasErrors()) {
+
+				List<String> errorMessage = new ArrayList<String>();
+				for (Object object : bindingResult.getAllErrors()) {
+					if (object instanceof FieldError) {
+						FieldError fieldError = (FieldError) object;
+						errorMessage.add(fieldError.getDefaultMessage());
+					}
+				}
+
+				return new DataResponse(StatusCode.BAD_REQUEST, ConstantMessage.BAD_REQUEST, errorMessage);
+			}
+			
+			return new DataResponse(StatusCode.SUCCESS, ConstantMessage.LOGIN_SUCCESS + ConstantMessage.LOGIN_MESSAGE,
+					adminService.loginAdmin(adminDto));
+
+		} catch (Exception e) {
+			return new DataResponse(StatusCode.INTERNAL_SERVER_ERROR, ConstantMessage.INTERNAL_SERVER_ERROR,
+					e.getMessage());
+		}
+	}
 		
 		
 		//this handler is for admin registration

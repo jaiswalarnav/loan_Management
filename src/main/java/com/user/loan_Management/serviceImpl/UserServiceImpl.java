@@ -2,10 +2,9 @@ package com.user.loan_Management.serviceImpl;
 
 import java.util.Date;
 import java.util.Optional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.user.loan_Management.ModelToDto.LoanApplicationToUserViewProfileDto;
 import com.user.loan_Management.constants.ConstantMessage;
 import com.user.loan_Management.dto.UserLoginReturnDto;
 import com.user.loan_Management.dto.UserUpdateProfileDto;
@@ -16,10 +15,9 @@ import com.user.loan_Management.model.Token;
 import com.user.loan_Management.repository.LoanApplicationRepository;
 import com.user.loan_Management.repository.TokenRepository;
 import com.user.loan_Management.service.UserService;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-//import io.jsonwebtoken.Jwts;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,7 +27,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	TokenRepository tokenRepository;
-
+	
+	@Autowired
+	ModelMapper modelMapper;
+	
 	public UserLoginReturnDto userLogin(long applicationNo, String dob) throws Exception {
 		Optional<LoanApplication> loanApplication = loanApplicationRepository.findById(applicationNo);
 		if (!(loanApplication.isPresent()))
@@ -57,10 +58,9 @@ public class UserServiceImpl implements UserService {
 		if (!loanApplication.isPresent())
 			throw new RuntimeException(ConstantMessage.INTERNAL_SERVER_ERROR);
 
-		LoanApplicationToUserViewProfileDto loanApplicationToUserViewProfileDto = new LoanApplicationToUserViewProfileDto();
+		UserViewProfileDto userViewProfileDto = new UserViewProfileDto();
 
-		UserViewProfileDto userViewProfileDto = loanApplicationToUserViewProfileDto
-				.loanApplicationToUserViewProfileDto(loanApplication.get());
+		modelMapper.map(loanApplication.get(), userViewProfileDto);
 
 		return userViewProfileDto;
 	}
@@ -72,6 +72,8 @@ public class UserServiceImpl implements UserService {
 			throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
 
 		UpdateUserProfileDtoToLoanApplication updateUserProfileDto = new UpdateUserProfileDtoToLoanApplication();
+		//modelMapper.map(userUpdateProfileDto, loanApplication.get());
+		//loanApplicationRepository.save(loanApplication.get());
 		
 		loanApplicationRepository.save(updateUserProfileDto.updateUserProfileDtoToLoanApplication(userUpdateProfileDto,
 				loanApplication.get()));

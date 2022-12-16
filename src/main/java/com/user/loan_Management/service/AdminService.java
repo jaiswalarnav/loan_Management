@@ -5,7 +5,7 @@ import com.user.loan_Management.dto.AdminRegisterDto;
 
 public interface AdminService {
 
-	//void loginAdmin(AdminDto adminDto)throws Exception;
+	String loginAdmin(AdminDto adminDto)throws Exception;
 	
 	long registerAdmin(AdminRegisterDto adminRegisterDto)throws Exception;
 }

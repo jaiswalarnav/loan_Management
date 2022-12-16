@@ -37,5 +37,7 @@ public class ConstantMessage {
 	public static final String EMI_MESSAGE="Your monthly EMI will be : ";
 	
 	public static final String ADMIN_ALREADY_EXIST="admin already exist with this name";
+	
+	public static final String ADMIN_NOT_EXIST="admin doesn't exist";
 
 }

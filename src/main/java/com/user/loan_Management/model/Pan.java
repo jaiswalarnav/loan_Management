@@ -23,7 +23,7 @@ public class Pan extends Support {
 	private Timestamp dob;
 	private String gender;
 	private String phoneNo;
-	private String emailId;
+	private String email;
 	private String address;
 
 }

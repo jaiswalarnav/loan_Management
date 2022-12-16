@@ -1,6 +1,8 @@
 package com.user.loan_Management.dto;
 
-import jakarta.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 
 @Data

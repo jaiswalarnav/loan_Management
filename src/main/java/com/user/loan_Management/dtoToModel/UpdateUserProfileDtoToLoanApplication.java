@@ -14,7 +14,7 @@ public class UpdateUserProfileDtoToLoanApplication {
 		loanApplication.setContactNo("+91" + userUpdateProfileDto.getContactNo());
 		loanApplication.setDob(loanApplication.getDob());
 		loanApplication.setGender(loanApplication.getGender());
-		loanApplication.setMailId(userUpdateProfileDto.getMailId());
+	//	loanApplication.setMailId(userUpdateProfileDto.getMailId());
 		loanApplication.setMarried(userUpdateProfileDto.isMarried());
 		loanApplication.setName(loanApplication.getName());
 		loanApplication.setEmployerName(loanApplication.getEmployerName());
