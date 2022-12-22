@@ -1,10 +1,11 @@
 package com.user.loan_Management.dto;
 
 
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

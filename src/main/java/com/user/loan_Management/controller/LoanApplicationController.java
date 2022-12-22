@@ -53,6 +53,8 @@ public class LoanApplicationController {
 
 				return new DataResponse(StatusCode.BAD_REQUEST, ConstantMessage.BAD_REQUEST, message);
 			}
+			if(loanApplicationDto.getMonthlyIncome()<15000)
+				throw new RuntimeException(ConstantMessage.INSUFFICIENT_INCOME);
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			String dob = loanApplicationDto.getDob();
@@ -135,8 +137,10 @@ public class LoanApplicationController {
 						errorMessage.add(fieldError.getDefaultMessage());
 					}
 				}
-			}
+			
 
+			return new DataResponse(StatusCode.BAD_REQUEST, ConstantMessage.BAD_REQUEST, errorMessage);
+	}
 			int emi =(int) Math.round(loanApplicationService.calculateEmi(calculateEmiDto));
 
 			return new DataResponse(StatusCode.SUCCESS, ConstantMessage.OK, ConstantMessage.EMI_MESSAGE + emi);

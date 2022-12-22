@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.user.loan_Management.constants.ConstantMessage;
+import com.user.loan_Management.model.Admin;
+import com.user.loan_Management.model.AdminRegister;
 import com.user.loan_Management.model.LoanApplication;
+import com.user.loan_Management.repository.AdminRepository;
 import com.user.loan_Management.repository.LoanApplicationRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -24,6 +27,9 @@ public class CrossFilter implements Filter {
 
 	@Autowired
 	LoanApplicationRepository loanApplicationRepository;
+	
+	@Autowired
+	AdminRepository  adminRepository;
 
 	@Override
 	public void doFilter(ServletRequest req,ServletResponse res,FilterChain chain)throws IOException,ServletException{
@@ -50,6 +56,18 @@ public class CrossFilter implements Filter {
 				else
 					throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
 			}
+			else if (url.contains("/admin") && request.getHeader("Authorization") != null) {
+				String id = Jwts.parser().setSigningKey("MustBeUniqueEverwhere")
+						.parseClaimsJws(request.getHeader("Authorization")).getBody().getSubject();
+				long adminId = Long.parseLong(id);
+				Optional<AdminRegister> adminRegister = adminRepository.findById(adminId);
+				if (adminRegister.isPresent()) {
+					req.setAttribute("id", adminRegister.get().getId());
+					chain.doFilter(req, res);
+				} else
+					throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
+			}
+			
 			else if(url.contains("/loan/personal-loan/apply-loan")||url.contains("/loan/personal-loan/loan-status")||url.contains("/loan/personal-loan/loan-details")||url.contains("/loan/personal-loan/calculate-emi") ||url.contains("/loan/personal-loan/user/login")||url.contains("/admin/register")||url.contains("/admin/login")) {
 				chain.doFilter(req, res);
 			}

@@ -1,10 +1,14 @@
 package com.user.loan_Management.dto;
 
-import java.sql.Timestamp;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+//import java.sql.Timestamp;
+//import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -20,12 +24,12 @@ public class AadharDto {
 	@NotBlank(message = "Name field can not be blank")
 	private String name;
 
-	@NotBlank(message = "Father name field can not be blank")
-	private String fatherName;
+//	@NotBlank(message = "Father name field can not be blank")
+//	private String fatherName;
 
 	@NotBlank(message = "DOB field can not be blank")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Timestamp dob;
+	private String dob;
 
 	@NotBlank(message = "Gender field can not be blank")
 	private String gender;

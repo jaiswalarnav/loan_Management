@@ -40,6 +40,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 			loanApplication = new LoanApplication();
 
 		loanApplicationDto.setApplicationStatus(ConstantMessage.IN_PROCESS);
+		loanApplicationDto.setMessage(ConstantMessage.IN_PROCESS_MESSAGE);
 		modelMapper.map(loanApplicationDto, loanApplication);
 		System.out.println(loanApplication);
 
@@ -59,7 +60,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		if(!(loanApplicationStatusDto.getDob().equals(loanApplication.get().getDob())))
 			throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
 
-		return loanApplication.get().getApplicationStatus();
+		return (loanApplication.get().getApplicationStatus()+". "+loanApplication.get().getMessage());
 	}
 	
 	public LoanDetailsDto viewLoanDetails() throws Exception {

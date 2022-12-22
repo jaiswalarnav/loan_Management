@@ -1,13 +1,18 @@
 package com.user.loan_Management.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+//import javax.validation.constraints.Email;
+//import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -39,7 +44,7 @@ public class LoanApplicationDto {
 	private String address;
 
 	@NotBlank(message = "Pan no can not be empty")
-	@Pattern(regexp = "^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$", message = "entervalid pan number")
+	@Pattern(regexp = "^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$", message = "enter valid pan number")
 	private String panNo;
 
 	@NotBlank(message = "Aadhar no can not be empty")
@@ -51,13 +56,13 @@ public class LoanApplicationDto {
 	private String occupationType;
 
 	@NotNull(message = "monthly income can not be empty")
-	private int monthlyIncome;
+	private Integer monthlyIncome;
 
 	@NotNull(message = "marital status can not be empty")
-	private boolean married;
+	private Boolean married;
 
 	@NotNull(message = "Current Employement Period can not be empty")
-	private int currentEmployementPeriod;
+	private Integer currentEmployementPeriod;
 
 	@NotBlank(message = "Employer Name can not be empty")
 	private String employerName;
@@ -78,15 +83,17 @@ public class LoanApplicationDto {
 	private String form16;
 
 	@NotNull(message = "Other Loans can not be empty")
-	private boolean otherLoans;
+	private Boolean otherLoans;
 
 	@NotNull(message = "total Emi can not be empty")
-	private int totalEmi;
+	private Integer totalEmi;
 
 	@NotNull(message = "Loan Amount can not be empty")
-	private int loanAmount;
+	private Integer loanAmount;
 
 	@NotNull(message = "Loan Tenure can not be empty")
-	private int loanTenure;
+	private Integer loanTenure;
+	
+	private String message;
 
 }
