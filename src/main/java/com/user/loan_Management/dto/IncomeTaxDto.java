@@ -1,8 +1,12 @@
 package com.user.loan_Management.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+//import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Size;
 
 public class IncomeTaxDto {
 	
@@ -14,7 +18,7 @@ public class IncomeTaxDto {
 	private String panNo;
 	
 	@NotBlank(message = "Tax paid amount field can not be blank")
-	private long taxPaidAmount;
+	private Long taxPaidAmount;
 
 	public IncomeTaxDto() {
 		super();

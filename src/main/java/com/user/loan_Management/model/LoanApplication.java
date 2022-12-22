@@ -1,11 +1,12 @@
 package com.user.loan_Management.model;
 
+import javax.validation.constraints.NotBlank;
+
 import com.user.loan_Management.model.support.Support;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Data
@@ -62,5 +63,7 @@ public class LoanApplication extends Support {
 
 	// @Column(columnDefinition = "varchar(50) default 'pending'")
 	private String applicationStatus;
+	
+	private String message;
 
 }

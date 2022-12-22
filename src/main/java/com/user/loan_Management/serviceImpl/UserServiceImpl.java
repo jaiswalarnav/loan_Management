@@ -71,12 +71,12 @@ public class UserServiceImpl implements UserService {
 		if (!loanApplication.isPresent())
 			throw new RuntimeException(ConstantMessage.INVALID_CREDENTIALS);
 
-		UpdateUserProfileDtoToLoanApplication updateUserProfileDto = new UpdateUserProfileDtoToLoanApplication();
-		//modelMapper.map(userUpdateProfileDto, loanApplication.get());
-		//loanApplicationRepository.save(loanApplication.get());
+		//UpdateUserProfileDtoToLoanApplication updateUserProfileDto = new UpdateUserProfileDtoToLoanApplication();
+		modelMapper.map(userUpdateProfileDto, loanApplication.get());
+		loanApplicationRepository.save(loanApplication.get());
 		
-		loanApplicationRepository.save(updateUserProfileDto.updateUserProfileDtoToLoanApplication(userUpdateProfileDto,
-				loanApplication.get()));
+		//loanApplicationRepository.save(updateUserProfileDto.updateUserProfileDtoToLoanApplication(userUpdateProfileDto,
+			//	loanApplication.get()));
 
 	}
 

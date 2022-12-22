@@ -17,8 +17,10 @@ public class UserViewProfileDto {
 
 	private String address;
 
-	private boolean married;
+	private Boolean married;
 	
 	private String applicationStatus;
+	
+	private String message;
 
 }

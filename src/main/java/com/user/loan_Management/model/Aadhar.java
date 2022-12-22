@@ -15,15 +15,13 @@ public class Aadhar extends Support {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	
 	private String aadharNo;
 	
 	private String name;
 	
-	private String fatherName;
-	
-	private Timestamp dob;
+	private String dob;
 	
 	private String gender;
 	

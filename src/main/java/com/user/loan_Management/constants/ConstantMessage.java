@@ -18,6 +18,10 @@ public class ConstantMessage {
 	
 	public static final String IN_PROCESS="In process";
 	
+	public static final String APPROVED="Approved";
+	
+	public static final String REJECTED="Rejected";
+	
 	public static final String LOAN_APPLICATION_IN_PROCESS="Loan application is in process";
 	
 	public static final String INVALID_APPLICATION_NUMBER="Application number is invalid";
@@ -39,5 +43,29 @@ public class ConstantMessage {
 	public static final String ADMIN_ALREADY_EXIST="admin already exist with this name";
 	
 	public static final String ADMIN_NOT_EXIST="admin doesn't exist";
+	
+	public static final String INVALID_AADHAR="Invalid Aadhar No.";
+	
+	public static final String INVALID_PAN="Invalid Pan Number";
+	
+	public static final String INSUFFICIENT_INCOME="Income must be greater than or equal to 15,000";
+	
+	public static final String IN_PROCESS_MESSAGE="We will get back to you shortly!";
+	
+	public static final String APPROVE_ROI="Applicable ROI will be: ";
+	
+	public static final String APPROVE_EMI="Your EMI will be: ";
+	
+	public static final String APPROVE_LOAN_AMOUNT=" Your approved loan amount is: ";
+	
+	public static final String REJECT_MESSAGE="Sorry! Your loan application has been rejected ";
+	
+	public static final String APPLICATION_VERIFIED="Application has already been verified  ";
+	
+	public static final String APPLICATION_STATUS_ERROR="Application status can not be empty";
+	
+	
+	
+	
 
 }

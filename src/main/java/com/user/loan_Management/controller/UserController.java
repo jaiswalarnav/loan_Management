@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,9 +24,7 @@ import com.user.loan_Management.dto.UserViewProfileDto;
 import com.user.loan_Management.http.response.DataResponse;
 import com.user.loan_Management.repository.LoanApplicationRepository;
 import com.user.loan_Management.service.UserService;
-import io.jsonwebtoken.Jwts;
 import jakarta.servlet.ServletRequest;
-import jakarta.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -84,7 +83,7 @@ public class UserController {
 	//this handler is to update user profile 
 	
 	@PutMapping("/update-profile")
-	public DataResponse updateProfile(@Valid ServletRequest req,@RequestBody UserUpdateProfileDto userUpdateProfileDto ,BindingResult bindingResult) {
+	public DataResponse updateProfile(@Valid @RequestBody UserUpdateProfileDto userUpdateProfileDto ,BindingResult bindingResult, ServletRequest req) {
 		try {
 			
 			if (bindingResult.hasErrors()) {
