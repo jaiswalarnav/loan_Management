@@ -1,6 +1,7 @@
 package com.user.loan_Management.serviceImpl;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -36,6 +37,8 @@ import com.user.loan_Management.service.AdminService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -134,6 +137,15 @@ public class AdminServiceImpl implements AdminService{
 	
 	public String verifyLoanApplication(long applicationNo) throws Exception {
 
+		ITesseract iTesseract=new Tesseract();
+		try {
+			String str=iTesseract.doOCR(new File("/Users/admin/Desktop/test123.png"));
+			System.out.println("OCR TEXT = "+str);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
 		Optional<LoanApplication> loanApplication = loanApplicationRepository.findById(applicationNo);
 
 		if (!loanApplication.isPresent())

@@ -1,5 +1,7 @@
 package com.user.loan_Management.dto;
 
+import java.io.Serializable;
+
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.NotNull;
@@ -16,7 +18,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class LoanApplicationDto {
+public class LoanApplicationDto implements Serializable {
 
 	private long id;
 
