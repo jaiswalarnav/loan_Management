@@ -1,5 +1,7 @@
 package com.user.loan_Management.model;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 
 import com.user.loan_Management.model.support.Support;
@@ -11,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class LoanApplication extends Support {
+public class LoanApplication extends Support implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

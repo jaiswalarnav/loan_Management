@@ -128,10 +128,53 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-json</artifactId>
+    <version>2.6.11</version>
+</dependency>
+
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+    <version>2.12.7</version>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish</groupId>
+    <artifactId>jakarta.el</artifactId>
+    <version>4.0.2</version>
+</dependency>
+
+<dependency>
+    <groupId>net.minidev</groupId>
+    <artifactId>json-smart</artifactId>
+    <version>2.3.1</version>
+</dependency>
+
+
+<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>-->
+
+
+
+<!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
+<!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
+<!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
+<dependency>
+    <groupId>net.sourceforge.tess4j</groupId>
+    <artifactId>tess4j</artifactId>
+    <version>4.5.1</version>
+</dependency>
+
+
 
 	</dependencies>
 

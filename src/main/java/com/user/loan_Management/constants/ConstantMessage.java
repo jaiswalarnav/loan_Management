@@ -46,9 +46,9 @@ public class ConstantMessage {
 	
 	public static final String INVALID_AADHAR="Invalid Aadhar No.";
 	
-	public static final String INVALID_PAN="Invalid Pan Number";
+	public static final String INVALID_PAN="Invalid Pan Number ";
 	
-	public static final String INSUFFICIENT_INCOME="Income must be greater than or equal to 15,000";
+	public static final String INSUFFICIENT_INCOME="Income must be greater than or equal to 15,000 ";
 	
 	public static final String IN_PROCESS_MESSAGE="We will get back to you shortly!";
 	
@@ -62,7 +62,13 @@ public class ConstantMessage {
 	
 	public static final String APPLICATION_VERIFIED="Application has already been verified  ";
 	
-	public static final String APPLICATION_STATUS_ERROR="Application status can not be empty";
+	public static final String APPLICATION_STATUS_ERROR="Application status can not be empty ";
+	
+	public static final String FILE_NOT_FOUND="File is required ";
+	
+	public static final String FILE_EXTENSION_ERROR="Only JPEG and PNG extension is allowed ";
+	
+	
 	
 	
 	
