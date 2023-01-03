@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class LoanManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LoanManagementApplication.class, args);
+		SpringApplication.run(LoanManagementApplication.class,args);
 	}
 
 	
