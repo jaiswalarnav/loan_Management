@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileUploadSupport {
 	
-	public final String uploadDir="C:\\Users\\Dell\\Pictures\\loan";
+	public final String uploadDir="/Users/admin/LoanApplicationDoc";
 	
 	public boolean uploadFile(MultipartFile multipartFile)throws Exception
 	{
