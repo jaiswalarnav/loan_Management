@@ -138,8 +138,9 @@ public class AdminServiceImpl implements AdminService{
 	public String verifyLoanApplication(long applicationNo) throws Exception {
 
 		ITesseract iTesseract=new Tesseract();
+		iTesseract.setDatapath("C:\\Program Files\\Tesseract-OCR\\tessdata");
 		try {
-			String str=iTesseract.doOCR(new File("/Users/admin/Desktop/test123.png"));
+			String str=iTesseract.doOCR(new File("C:\\Users\\Dell\\Downloads\\100-of-the-Most-Uplifting-Quotes-Ever25-scaled.png"));
 			System.out.println("OCR TEXT = "+str);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
