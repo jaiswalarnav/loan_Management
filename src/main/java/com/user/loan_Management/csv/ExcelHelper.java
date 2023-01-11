@@ -2,169 +2,140 @@ package com.user.loan_Management.csv;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.util.StringUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.user.loan_Management.model.Aadhar;
 import com.user.loan_Management.repository.AadharRepository;
-
 import io.micrometer.common.util.StringUtils;
 
-@Configuration
+@Component
 public class ExcelHelper {
 
 	@Autowired
 	AadharRepository aadharRepository;
 
-	public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-	//static String[] HEADERs = { "aadhaNo", "name", "dob", "gender", "phoneNo", "email", "address" };
-	static String SHEET = "Aadhar";
 
-//	public static boolean hasExcelFormat(MultipartFile file) {
-//		if (!TYPE.equals(file.getContentType())) {
-//		      return false;
-//		    }
-//
-//		    return true;
-//	}
+	public void saveAadhar(MultipartFile multipartFile) {
+		try
 
-	@Bean
-	public void saveAadhar() {
-	try
+		{
 
-	{
+			InputStream targetStream = new FileInputStream(
+					new ClassPathResource("static/excel/" + multipartFile.getOriginalFilename()).getFile());
+			List<Aadhar> aadhars = excelToAadhar(targetStream);
+			aadharRepository.saveAll(aadhars);
+			new File(new ClassPathResource("static/excel").getFile(), multipartFile.getOriginalFilename()).delete();
 
-		InputStream targetStream = new FileInputStream(new File("src/main/resources/Aadhar.xlsx"));
-		List<Aadhar> aadhars = excelToAadhar(targetStream);
-		aadharRepository.saveAll(aadhars);
-
-	}catch(
-	IOException e)
-	{
-		throw new RuntimeException("fail to store excel data: " + e.getMessage());
-	}
+		} catch (IOException e) {
+			throw new RuntimeException("fail to store excel data: " + e.getMessage());
+		}
 	}
 
 	public static List<Aadhar> excelToAadhar(InputStream is) {
-	    try {
-	    	
-	      Workbook workbook = new XSSFWorkbook(is);
+		try {
 
-	     
-	      Sheet sheet = workbook.getSheet(SHEET);
-	      
-	  //    int nor= sheet.getPhysicalNumberOfRows();
-	      
-	      
-	      Iterator<Row> rows = sheet.iterator();
-	     
+			Workbook workbook = new XSSFWorkbook(is);
 
-	      List<Aadhar> aadhars = new ArrayList<Aadhar>();
+			Sheet sheet = workbook.getSheetAt(0);
 
-	      int rowNumber = 0;
-	      while (rows.hasNext()) {
-	        Row currentRow = rows.next();
-	       
+			Iterator<Row> rows = sheet.iterator();
 
-	        // skip header
-	        if (rowNumber == 0) {
-	         rowNumber++;
-	          continue;
-	        }
-	        if(isRowEmpty(currentRow))
-				continue;
+			List<Aadhar> aadhars = new ArrayList<Aadhar>();
 
-	        Iterator<Cell> cellsInRow = currentRow.iterator();
+			int rowNumber = 0;
+			while (rows.hasNext()) {
+				Row currentRow = rows.next();
 
-	        Aadhar aadhar = new Aadhar();
+				// skip header
+				if (rowNumber == 0) {
+					rowNumber++;
+					continue;
+				}
+				if (isRowEmpty(currentRow))
+					continue;
 
-			int cellIdx = 0;
-			while (cellsInRow.hasNext()) {
-				Cell currentCell = cellsInRow.next();
-				
-				
+				Iterator<Cell> cellsInRow = currentRow.iterator();
 
-				switch (cellIdx) {
-				case 0:
-					aadhar.setAadharNo(currentCell.getStringCellValue());
-					break;
+				Aadhar aadhar = new Aadhar();
 
-				case 1:
-					aadhar.setName(currentCell.getStringCellValue());
-					break;
+				int cellIdx = 0;
+				while (cellsInRow.hasNext()) {
+					Cell currentCell = cellsInRow.next();
 
-				case 2:
-					aadhar.setDob(currentCell.getStringCellValue());
-					break;
+					switch (cellIdx) {
+					case 0:
+						aadhar.setAadharNo(currentCell.getStringCellValue());
+						break;
 
-				case 3:
-					aadhar.setGender(currentCell.getStringCellValue());
-					break;
+					case 1:
+						aadhar.setName(currentCell.getStringCellValue());
+						break;
 
-				case 4:
-					aadhar.setPhoneNo(currentCell.getStringCellValue());
-					break;
+					case 2:
+						aadhar.setDob(currentCell.getStringCellValue());
+						break;
 
-				case 5:
-					aadhar.setEmail(currentCell.getStringCellValue());
-					break;
+					case 3:
+						aadhar.setGender(currentCell.getStringCellValue());
+						break;
 
-				case 6:
-					aadhar.setAddress(currentCell.getStringCellValue());
-					break;
+					case 4:
+						aadhar.setPhoneNo(currentCell.getStringCellValue());
+						break;
 
-				default:
-					break;
+					case 5:
+						aadhar.setEmail(currentCell.getStringCellValue());
+						break;
+
+					case 6:
+						aadhar.setAddress(currentCell.getStringCellValue());
+						break;
+
+					default:
+						break;
+					}
+
+					cellIdx++;
 				}
 
-	          cellIdx++;
-	        }
+				aadhars.add(aadhar);
+			}
 
-	        aadhars.add(aadhar);
-	      }
+			workbook.close();
 
-	      workbook.close();
+			return aadhars;
 
-	      return aadhars;
-	    
-	    
-	    } catch (IOException e) {
-	      throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
-	    }
-	  
+		} catch (IOException e) {
+			throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+		}
 
-	  
-}
-	
+	}
+
 	public static Boolean isRowEmpty(Row row) {
-		if(row==null) {
+		if (row == null) {
 			return true;
 		}
-		if(row.getLastCellNum()<=0)
+		if (row.getLastCellNum() <= 0)
 			return true;
-		for(int cellNum=row.getFirstCellNum();cellNum<=row.getLastCellNum();cellNum++) {
-			Cell cell=row.getCell(cellNum);
-			if(cell!=null && cell.getCellTypeEnum()!=CellType.BLANK && StringUtils.isNotBlank(cell.toString())) {
+		for (int cellNum = row.getFirstCellNum(); cellNum <= row.getLastCellNum(); cellNum++) {
+			Cell cell = row.getCell(cellNum);
+			if (cell != null && cell.getCellTypeEnum() != CellType.BLANK && StringUtils.isNotBlank(cell.toString())) {
 				return false;
 			}
 		}
 		return true;
 	}
 }
-
