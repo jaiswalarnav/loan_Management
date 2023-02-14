@@ -16,4 +16,6 @@ public interface LoanApplicationService {
 	
 	double calculateEmi(CalculateEmiDto calculateEmiDto)throws Exception;
 	
+	String sendAdminEmail(long loanApplicationId)throws Exception;
+	
 }

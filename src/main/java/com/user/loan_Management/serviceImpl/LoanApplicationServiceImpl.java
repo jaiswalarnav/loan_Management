@@ -1,11 +1,23 @@
 package com.user.loan_Management.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.partitions.model.Region;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
+import com.amazonaws.services.simpleemail.model.Body;
+import com.amazonaws.services.simpleemail.model.Content;
+import com.amazonaws.services.simpleemail.model.Destination;
+import com.amazonaws.services.simpleemail.model.Message;
+import com.amazonaws.services.simpleemail.model.SendEmailRequest;
+import com.amazonaws.services.simpleemail.model.SendEmailResult;
 import com.user.loan_Management.constants.ConstantMessage;
 import com.user.loan_Management.dto.CalculateEmiDto;
 import com.user.loan_Management.dto.LoanApplicationDto;
@@ -29,6 +41,9 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	AmazonSimpleEmailService amazonSimpleEmailService;
 
 	public long createLoanApplication(LoanApplicationDto loanApplicationDto) throws Exception {
 
@@ -45,6 +60,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		System.out.println(loanApplication);
 
 		return loanApplicationRepository.save(loanApplication).getId();
+		
+		
 
 	}
 
@@ -89,4 +106,37 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		return emi;
 	}
 
+	public String sendAdminEmail(long loanApplicationId)throws Exception {
+		
+		
+		String FROM="arnav.jaiswal@techvalens.com";
+		String TO="ankit.shinde@techvalens.com";
+		List<String> toAddresses=new ArrayList<String>();
+		toAddresses.add(TO);
+		Destination destination=new Destination(toAddresses);
+		//Regions region=Regions.AP_SOUTH_1;
+		
+		//AmazonSimpleEmailService client=AmazonSimpleEmailServiceClientBuilder.standard().withRegion(region).build();
+		SendEmailRequest sendEmailRequest=new SendEmailRequest();
+		sendEmailRequest.setSource(FROM);
+		sendEmailRequest.setDestination(destination);
+		
+		
+		
+		Content subject=new Content("NEW LOAN APPLICATION");
+		Content text=new Content("Hey ADMIN,Please verify the below application! "+'\n'+" Loan Application No is : "+loanApplicationId);
+		Body body=new Body(text);
+		Message message=new Message(subject, body);
+		sendEmailRequest.setMessage(message);
+		
+		SendEmailResult emailResult=  amazonSimpleEmailService.sendEmail(sendEmailRequest);
+		if(emailResult.getMessageId()!=null)
+			return ConstantMessage.MAIL_SENT;
+			
+			
+		else
+			return ConstantMessage.MAIL_ERROR;
+			
+		
+	}
 }
