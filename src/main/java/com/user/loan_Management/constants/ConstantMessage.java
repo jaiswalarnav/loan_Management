@@ -68,6 +68,10 @@ public class ConstantMessage {
 	
 	public static final String FILE_EXTENSION_ERROR="Only JPEG and PNG extension is allowed ";
 	
+	public static final String MAIL_SENT="Email sent";
+	
+	public static final String MAIL_ERROR="Email not sent ";
+	
 	
 	
 	

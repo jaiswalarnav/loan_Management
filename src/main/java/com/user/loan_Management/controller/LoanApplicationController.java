@@ -105,6 +105,11 @@ public class LoanApplicationController {
 
 			long applicationNo = loanApplicationService.createLoanApplication(loanApplicationDto);
 
+			 String mailMessage=  loanApplicationService.sendAdminEmail(applicationNo);
+			 
+			 if(mailMessage!= ConstantMessage.MAIL_SENT)
+				 throw new RuntimeException(ConstantMessage.MAIL_ERROR);
+			
 			return new DataResponse(StatusCode.SUCCESS, ConstantMessage.SUCCESSFUL_APPLICATION,
 					ConstantMessage.APPLICATION_NUMBER + applicationNo);
 
