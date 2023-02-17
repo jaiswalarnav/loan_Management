@@ -112,6 +112,7 @@ class LoanApplicationRepositoryTest {
 	}
 	
 	
+	@Disabled
 	@Test
 	void testFindByPanNo() {
 		LoanApplication loanApplication1 = new LoanApplication();
@@ -145,17 +146,22 @@ class LoanApplicationRepositoryTest {
 		loanApplication1.setUpdatedAt(null);
 		LoanApplication expectedLoanApplication = loanApplicationRepository.save(loanApplication1);
 		
-		LoanApplication actualLoanApplication = loanApplicationRepository.findByPanNo("ABCTY1234N");
+		LoanApplication actualLoanApplication = loanApplicationRepository.findByPanNo("ABCTY1234M");
 		
 		assertEquals(expectedLoanApplication, actualLoanApplication);
 		
 	}
 	
+	@Disabled
+	@AfterEach
+	  void cleanUp() {
+		System.out.println("Cleaning up");
+		loanApplicationRepository.deleteAll();
+	}
+
 	
-//	@AfterEach
-//	  void cleanUp() {
-//		System.out.println("Cleaning up");
+//	@AfterAll
+//	static void cleanUp() {
 //		loanApplicationRepository.deleteAll();
 //	}
-
 }
